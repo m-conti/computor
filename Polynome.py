@@ -17,7 +17,7 @@ class Polynome:
 		self.inscribe(pol)
 
 	def __str__(self):
-		return 'a = {a} | b = {b} | c = {c}'.format(a=self.a, b=self.b, c=self.c)
+		return 'a = {a:g} | b = {b:g} | c = {c:g}'.format(a=self.a, b=self.b, c=self.c)
 
 	# b² − 4ac
 	@property
@@ -26,7 +26,16 @@ class Polynome:
 
 	@property
 	def reduced(self):
-		return '{a} * x² + {b} * x + {c} = 0'.format(a=self.a, b=self.b, c=self.c)
+		parts = []
+		if self.a:
+			parts.append('{:g} * x² '.format(self.a))
+		if self.b:
+			parts.append('{:g} * x '.format(self.b))
+		if self.c:
+			parts.append('{:g} '.format(self.c))
+		if parts:
+			return '{}= 0'.format('+ '.join(parts))
+		return '0 = 0'
 
 	@property
 	def degree(self):
@@ -70,6 +79,8 @@ class Polynome:
 			raise Exception('{} isn\'t a correct exponent'.format(power))
 		elif int(power) > 2:
 			raise Exception('the exponent {} is greater than 2. I can\' solve it.'.format(power))
+		elif int(power) < 0:
+			raise Exception('the exponent {} is smaller than 0. I can\' solve it.'.format(power))
 
 	@staticmethod
 	def set_operand(operand, after_equality):
@@ -100,6 +111,10 @@ class Polynome:
 			]
 
 	def solution(self):
+		if self.degree == 0:
+			return 'we have no solution' if self.c else 'we don\'t have unknown and the equation is solved'
+		if self.degree == 1:
+			return 'we have 1 solution : {:g}'.format(-self.c / self.b)
 		(discriminant, solutions) = self.resolve()
 		return 'the discriminant is {0}, we have {1} solution(s) :\n{2}'.format(
 				discriminant,
