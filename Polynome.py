@@ -114,7 +114,7 @@ class Polynome:
 		if self.degree == 0:
 			return 'we have no solution' if self.c else 'we don\'t have unknown and the equation is solved'
 		if self.degree == 1:
-			return 'we have 1 solution : {:g}'.format(-self.c / self.b)
+			return 'we have 1 solution : {:g}'.format((-self.c / self.b) + 0)
 		(discriminant, solutions) = self.resolve()
 		return 'the discriminant is {0}, we have {1} solution(s) :\n{2}'.format(
 				discriminant,
