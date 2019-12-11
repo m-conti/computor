@@ -39,9 +39,9 @@ def do_test():
 
 
 if __name__ == '__main__':
-	if len(sys.argv) == 1:
+	if len(sys.argv) <= 1:
 		print('no argument pass.')
-	if sys.argv[1] == 'tests':
+	elif sys.argv[1] == 'tests':
 		do_test()
 	else:
 		for arg in sys.argv[1:]:

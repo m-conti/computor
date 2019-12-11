@@ -12,8 +12,8 @@ class Polynome:
 		self.c = 0
 		self.elements = []
 
-		if re.match(regex.equation, pol).group() != pol:
-			raise Exception('Error !')
+		if not re.match(regex.equation, pol) or re.match(regex.equation, pol).group() != pol:
+			raise Exception('Syntax Error ! The equation isn\'t correct :\n\t{}'.format(pol))
 		self.inscribe(pol)
 
 	def __str__(self):
