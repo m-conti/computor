@@ -1,8 +1,5 @@
 import regex
 import re
-import math
-import cmath
-
 
 class Polynome:
 
@@ -99,15 +96,15 @@ class Polynome:
 	def resolve(self):
 		if self.delta > 0:
 			return 'positive', [
-				'x1 = ' + str(-self.b + math.sqrt(self.delta) / (2 * self.a)),
-				'x2 = ' + str(-self.b - math.sqrt(self.delta) / (2 * self.a)),
+				'x1 = ' + str(-self.b + (self.delta ** 0.5) / (2 * self.a)),
+				'x2 = ' + str(-self.b - (self.delta ** 0.5) / (2 * self.a)),
 			]
 		elif self.delta == 0:
 			return 'null', ['x = ' + str(-self.b / (2 * self.a))]
 		else:
 			return 'negative', [
-				'x1 = ' + str(-self.b + cmath.sqrt(self.delta) / (2 * self.a)),
-				'x2 = ' + str(-self.b - cmath.sqrt(self.delta) / (2 * self.a)),
+				'x1 = {:g} + {:g}i'.format((-self.b / (2 * self.a)), abs((abs(self.delta) ** 0.5) / (2 * self.a))),
+				'x2 = {:g} - {:g}i'.format((-self.b / (2 * self.a)), abs((abs(self.delta) ** 0.5) / (2 * self.a))),
 			]
 
 	def solution(self):
